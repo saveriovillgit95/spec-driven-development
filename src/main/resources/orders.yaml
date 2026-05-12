@@ -1,0 +1,38 @@
+paths:
+  /orders/{id}:
+    get:
+      tags:
+        - Orders
+      summary: Get order by id
+      operationId: getOrderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Order found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderDto"
+        "404":
+          description: Order not found
+
+components:
+  schemas:
+    OrderDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        surname:
+          type: string
+        age:
+          type: integer
