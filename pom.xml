@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.5</version>
+		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.myproject.sdd</groupId>
@@ -28,29 +28,28 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<spring.boot.version>3.3.0</spring.boot.version>
 		<openapi.generator.version>7.6.0</openapi.generator.version>
 		<pact.version>4.6.10</pact.version>
 	</properties>
-	<dependencyManagement>
-		<dependencies>
-
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
 	<dependencies>
 
 		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- H2 (in-memory DB per dev/test) -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Validation -->
@@ -66,11 +65,7 @@
 			<version>2.5.0</version>
 		</dependency>
 
-		<!-- Jackson -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
+		<!-- Jackson (gestito da Spring Boot 4 via tools.jackson) -->
 
 		<!-- Lombok (optional) -->
 		<dependency>
@@ -94,6 +89,17 @@
 			<artifactId>junit5spring</artifactId>
 			<version>${pact.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<!-- Pact porta javax.servlet 3.1 che confligge con Jakarta Servlet (Spring Boot 4) -->
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>javax.servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.openapitools</groupId>
