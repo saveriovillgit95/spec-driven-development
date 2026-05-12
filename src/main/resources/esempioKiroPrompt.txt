@@ -1,0 +1,14 @@
+Sto usando Spring Boot 3 + OpenAPI Generator.
+
+Ho già:
+- UsersApi (generato)
+- UserDto (generato)
+
+Implementa:
+- UserController
+- UserService
+- UserRepository (JPA)
+- gestione 404
+- test JUnit
+
+Segui architettura clean e Spec-Driven Development.

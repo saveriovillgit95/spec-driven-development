@@ -7,6 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Implements the contract defined in openapi.yaml via the generated UsersApi interface.
+ * Exception handling (404) is delegated to GlobalExceptionHandler.
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserController implements UsersApi {
@@ -15,6 +19,7 @@ public class UserController implements UsersApi {
 
     @Override
     public ResponseEntity<UserDto> getUserById(Integer id) {
-        return ResponseEntity.ok(userService.getUser(id));
+        UserDto user = userService.getUser(id);  // throws UserNotFoundException → 404
+        return ResponseEntity.ok(user);
     }
 }
