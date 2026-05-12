@@ -1,0 +1,34 @@
+components:
+  schemas:
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        age:
+          type: integer
+
+    OrderDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        description:
+          type: string
+        amount:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+            - PENDING
+            - CONFIRMED
+            - CANCELLED
