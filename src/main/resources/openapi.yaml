@@ -6,6 +6,8 @@ info:
 paths:
   /users/{id}:
     get:
+      tags:
+        - Users
       summary: Get user by id
       operationId: getUserById
       parameters:
